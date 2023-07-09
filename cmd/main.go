@@ -18,34 +18,44 @@ import (
 func main() {
 
 	application := app.New()
-	window := application.NewWindow("Калькулятор ИМТ")
 
+	// Создание окна программы
+	window := application.NewWindow("Калькулятор ИМТ")
 	window.Resize(helpers.WindowSize)
 	window.SetFixedSize(true)
 
 	application.Settings().SetTheme(&helpers.CustomTheme{})
 
+	// Обьявление заголовка в программе
 	titleLabel := canvas.NewText("IWEIGHT", helpers.TextColor)
 	titleLabel.TextStyle.Bold = true
 	titleLabel.TextSize = helpers.TextSize
 
+	// Обьявление заголовка для ввода веса
 	weightLabel := canvas.NewText("Вес в кг", helpers.TextColor)
 	weightLabel.TextSize = helpers.TextSize
 
+	// Обьявление виджета для ввода данных
 	weightEntry := widget.NewEntry()
 	weightEntry.SetPlaceHolder("47.21")
 
+	// Обьявление заголовка для ввода роста
 	heightLabel := canvas.NewText("Рост в см", helpers.TextColor)
 	heightLabel.TextSize = helpers.TextSize
 
+	// Обьявление виджера для ввода роста
 	heightEntry := widget.NewEntry()
 	heightEntry.SetPlaceHolder("47.21")
 
+	// Обьявление заголовка для выбора пола
 	sexLabel := canvas.NewText("Выберите пол", helpers.TextColor)
 	sexLabel.TextSize = helpers.TextSize
+
+	// Обьявление виджета для выбора пола
 	sexSelect := widget.NewSelect([]string{"Мужчина", "Женщина"}, func(s string) {})
 	sexSelect.PlaceHolder = "Выберите один"
 
+	// Обьявление кнопки и ее функционал для подсчета ИМТ по введенным данным
 	calculateButton := widget.NewButton("Рассчитать ИМТ", func() {
 		height := heightEntry.Text
 		err := validators.NumValidator(height)
@@ -66,6 +76,7 @@ func main() {
 
 		bmi := validWeight / math.Pow(validHeight/100, 2)
 
+		// Создание второго окна
 		ResultWindow(application, bmi)
 
 	})
@@ -84,6 +95,7 @@ func main() {
 		buttonLayout,
 	)
 
+	// Вывод всех созданных виджетов в окно программы
 	window.SetContent(container.NewVBox(
 		titleLayout,
 		layout.NewSpacer(),
@@ -101,6 +113,7 @@ func main() {
 	window.ShowAndRun()
 }
 
+// Создание второго окна с результатами расчетов
 func ResultWindow(app fyne.App, result float64) {
 	window := app.NewWindow("Результат")
 	window.Resize(helpers.WindowSize)
