@@ -20,16 +20,7 @@ git clone https://github.com/Leraorkina/bmi-calculator.git
 git clone https://github.com/Leraorkina/bmi-calculator.git
 ```
 
-2. Перейдите в директорию build с бинармыми файлами
-
-```
-cd bmi-calculator/build
-```
-
-3. Запустите файл `bmi-calculator` командой 
-```
-./bmi-calculator
-```
+2. Перейдите в директорию bmi-calculator/build и запустите файл bmi-calculator_linux
 
 ## Стек техгологий
 
